@@ -1,0 +1,15 @@
+frontend:
+  - changed-files:
+    - any-glob-to-any-file: 'src/components/**/*'
+styles:
+  - changed-files:
+    - any-glob-to-any-file: '**/*.css'
+pages:
+  - changed-files:
+    - any-glob-to-any-file: 'src/app/**/*'
+config:
+  - changed-files:
+    - any-glob-to-any-file: ['*.config.*', 'package.json']
+public:
+  - changed-files:
+    - any-glob-to-any-file: 'public/**/*'

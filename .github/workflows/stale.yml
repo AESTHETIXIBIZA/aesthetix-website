@@ -1,0 +1,20 @@
+name: Close Stale Issues & PRs
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-stale: 30
+          days-before-close: 7
+          stale-issue-message: 'Inactive for 30 days — closing in 7 days unless updated.'
+          stale-pr-message: 'Inactive for 30 days — closing in 7 days unless updated.'
+          stale-issue-label: 'stale'
+          stale-pr-label: 'stale'
