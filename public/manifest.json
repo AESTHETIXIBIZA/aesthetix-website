@@ -1,0 +1,25 @@
+{
+  "name": "ÆSTHETIX - High-End Visual Content Agency",
+  "short_name": "ÆSTHETIX",
+  "description": "Premium photography, videography & brand identity for luxury brands, hotels, and personal brands.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["business", "photography"],
+  "lang": "de",
+  "dir": "ltr"
+}

@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F5F5F7;
+  --foreground: #111111;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Noise Grain Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+/* Smooth animations */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation-duration: 700ms;
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+.slide-in-from-bottom-10 {
+  animation-name: slide-in-from-bottom;
+}
+
+/* Page transition */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: page-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Staggered children animation */
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-children > * {
+  opacity: 0;
+  animation: stagger-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* Subtle pulse animation */
+@keyframes subtle-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1) inset;
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 15px 50px -10px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.15) inset;
+  }
+}
+
+.animate-subtle-pulse {
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+/* Infinite scroll marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 12s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee 20s linear infinite;
+}
+
+/* Selection styling */
+::selection {
+  background: #111111;
+  color: white;
+}
+
+/* Magnetic button transition */
+.magnetic-btn {
+  transition: transform 0.2s ease-out, background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Image reveal on scroll */
+.reveal-image {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-image.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Calendly Button Animations */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+@keyframes pulse-slower {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+.animate-pulse-slower {
+  animation: pulse-slower 2.5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+
+/* Image placeholder for broken/loading images */
+img:not([src]), img[src=""], img:-moz-broken {
+  position: relative;
+  background: #F5F5F7;
+}
+
+img:not([src])::before, img[src=""]::before, img:-moz-broken::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #F5F5F7 url('/logo.png') center center / 40% auto no-repeat;
+  opacity: 0.1;
+}
+
+/* Hide alt text for broken images */
+img:not([src]), img[src=""] {
+  color: transparent;
+}
+
+/* Next.js Image placeholder styling */
+[data-nimg]::before {
+  display: none;
+}
+
+/* Card Fan Animation (GSAP replacement) */
+.fan-card {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(-8deg) scale(0.95) translateY(0);
+  transform-origin: center top;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fan-card.fan-visible {
+  opacity: 1;
+  transform: perspective(1200px) rotateX(0deg) scale(1) translateY(var(--card-offset, 0));
+}
+
+/* Fan section header animation */
+.fan-header {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fan-header.fan-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
